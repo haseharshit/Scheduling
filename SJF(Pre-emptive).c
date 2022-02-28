@@ -2,10 +2,10 @@
  #include<conio.h>
  struct Process {
 	int pid; // Process ID
-	int art; // Arrival Time
+	int at; // Arrival Time
 	int bt; // Burst Time
-	int completion; //Completion time
-	int wait; //waiting time
+	int ct; //Completion time
+	int wt; //waiting time
 };
 
 // Function to find the waiting time for all processes
@@ -23,17 +23,11 @@ void findWaitingTime(struct Process proc[], int n)
 	int shortest = 0, finish_time;
 	int check = 0;
 
-	// Process until all processes gets
-	// completed
 	while (complete != n) {
 
-		// Find process with minimum
-		// remaining time among the
-		// processes that arrives till the
-		// current time`
 		for (int j = 0; j < n; j++)
         {
-			if ((proc[j].art <= t) &&(rt[j] < min) && (rt[j] > 0)) {
+			if ((proc[j].at <= t) &&(rt[j] < min) && (rt[j] > 0)) {
 				min = rt[j];
 				shortest = j;
 				check = 1;
@@ -70,13 +64,13 @@ void findWaitingTime(struct Process proc[], int n)
 			// process
 			finish_time = t + 1;
 
-            proc[shortest].completion=finish_time;
+            proc[shortest].ct=finish_time;
 
 			// Calculate waiting time
-			proc[shortest].wait= proc[shortest].completion - proc[shortest].bt - proc[shortest].art;
+			proc[shortest].wt= proc[shortest].ct - proc[shortest].bt - proc[shortest].wt;
 
-			if (proc[shortest].wait < 0)
-				proc[shortest].wait = 0;
+			if (proc[shortest].wt < 0)
+				proc[shortest].wt = 0;
 		}
 		// Increment time
 		t++;
@@ -88,7 +82,7 @@ void findTurnAroundTime(struct Process proc[], int n, int tat[])
 {
 	for (int i = 0; i < n; i++)
     {
-      tat[i] = proc[i].bt +proc[i].wait;
+      tat[i] = proc[i].bt +proc[i].wt;
     }
 
 }
@@ -116,10 +110,10 @@ void findavgTime(struct Process proc[], int n)
 	// total turnaround time
 	for (int i = 0; i < n; i++)
     {
-		total_wt = total_wt + proc[i].wait;
+		total_wt = total_wt + proc[i].wt;
 		total_tat = total_tat + tat[i];
 
-		printf(" %d \t\t %d \t\t %d \t\t %d \t\t %d \t\t %d\n",proc[i].pid ,proc[i].art, proc[i].bt ,proc[i].completion,proc[i].wait,tat[i]);
+		printf(" %d \t\t %d \t\t %d \t\t %d \t\t %d \t\t %d\n",proc[i].pid ,proc[i].at, proc[i].bt ,proc[i].completion,proc[i].wait,tat[i]);
 	}
 
 	printf("\nAverage waiting time = %f", (float)total_wt/n );
@@ -140,7 +134,7 @@ int main()
         printf("\nEnter process id: ");
      scanf("%d",&proc[i].pid);
      printf("\nEnter Arrival time: ");
-     scanf("%d",&proc[i].art);
+     scanf("%d",&proc[i].at);
      printf("\nEnter Burst time: ");
         scanf("%d",&proc[i].bt);
     }
