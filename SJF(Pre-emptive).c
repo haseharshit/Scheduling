@@ -113,7 +113,7 @@ void findavgTime(struct Process proc[], int n)
 		total_wt = total_wt + proc[i].wt;
 		total_tat = total_tat + tat[i];
 
-		printf(" %d \t\t %d \t\t %d \t\t %d \t\t %d \t\t %d\n",proc[i].pid ,proc[i].at, proc[i].bt ,proc[i].completion,proc[i].wait,tat[i]);
+		printf(" %d \t\t %d \t\t %d \t\t %d \t\t %d \t\t %d\n",proc[i].pid ,proc[i].at, proc[i].bt ,proc[i].ct,proc[i].wt,tat[i]);
 	}
 
 	printf("\nAverage waiting time = %f", (float)total_wt/n );
