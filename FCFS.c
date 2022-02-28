@@ -28,12 +28,9 @@ int main()
                 temp=burst[i];
                 burst[i]=burst[j];
                 burst[j]=temp;
-               // strcpy(t,pn[i]);
-               // strcpy(pn[i],pn[j]);
-               // strcpy(pn[j],t);
-               temp=pn[i];
-               pn[i]=pn[j];
-               pn[j]=temp;
+                temp=pn[i];
+                pn[i]=pn[j];
+                pn[j]=temp;
             }
 
         }
